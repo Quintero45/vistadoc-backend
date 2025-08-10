@@ -1,5 +1,12 @@
-import { Entity, PrimaryGeneratedColumn, Column, ManyToOne } from 'typeorm';
+import {
+  Entity,
+  PrimaryGeneratedColumn,
+  Column,
+  ManyToOne,
+  OneToMany,
+} from 'typeorm';
 import { Company } from 'src/companies/company.entity';
+import { Plant } from 'src/plant/plant.entity';
 
 @Entity()
 export class Project {
@@ -17,4 +24,7 @@ export class Project {
 
   @ManyToOne(() => Company, (company) => company.projects)
   company: Company;
+
+  @OneToMany(() => Plant, (plant) => plant.project) // 👈 Esto es lo que TypeORM no encuentra
+  plants: Plant[];
 }
