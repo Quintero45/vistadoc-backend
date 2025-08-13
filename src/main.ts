@@ -1,3 +1,6 @@
+// registra alias: 'src' -> 'dist' (lo define _moduleAliases en package.json)
+import 'module-alias/register';
+
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
 

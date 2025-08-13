@@ -32,4 +32,4 @@ COPY --from=build /app/dist ./dist
 
 # Render inyecta PORT. Nest escucha en 0.0.0.0:PORT (ya lo tienes en main.ts)
 EXPOSE 3000
-CMD ["node", "dist/main.js"]
+CMD ["node", "-r", "module-alias/register", "dist/main.js"]
