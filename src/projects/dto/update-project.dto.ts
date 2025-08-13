@@ -1,5 +1,5 @@
 // src/projects/dto/update-project.dto.ts
-import { IsOptional, IsString, IsUrl } from 'class-validator';
+import { IsOptional, IsString } from 'class-validator';
 import { ApiPropertyOptional } from '@nestjs/swagger';
 
 export class UpdateProjectDto {
@@ -20,12 +20,12 @@ export class UpdateProjectDto {
   address?: string;
 
   @ApiPropertyOptional({
-    example: 'https://res.cloudinary.com/demo/image/upload/proyecto-nuevo.jpg',
-    description: 'Nueva URL de imagen representativa del proyecto (opcional)',
+    type: 'string',
+    format: 'binary',
+    description: 'Nueva imagen para el proyecto (opcional)',
   })
   @IsOptional()
-  @IsUrl()
-  imageUrl?: string;
+  imageUrl?: any; // Archivo que recibimos vía multipart/form-data
 
   @ApiPropertyOptional({
     example: 'Actualización de la segunda fase del conjunto',

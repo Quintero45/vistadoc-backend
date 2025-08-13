@@ -1,23 +1,38 @@
 // src/cloudinary/cloudinary.service.ts
 import { Injectable } from '@nestjs/common';
+// ✅ IMPORTA SIEMPRE la instancia configurada
 import { cloudinary } from './cloudinary.config';
 import { UploadApiResponse, UploadApiErrorResponse } from 'cloudinary';
 
 @Injectable()
 export class CloudinaryService {
+  // PDF/plano (raw)
   async uploadPdf(file: Express.Multer.File): Promise<UploadApiResponse> {
     return new Promise((resolve, reject) => {
-      cloudinary.uploader.upload_stream(
-        {
-          resource_type: 'raw',
-          folder: 'vistadoc/planos', // opcional
-          format: 'JPG',
-        },
-        (error: UploadApiErrorResponse, result: UploadApiResponse) => {
-          if (error) return reject(error);
-          resolve(result);
-        },
-      ).end(file.buffer);
+      cloudinary.uploader
+        .upload_stream(
+          { resource_type: 'raw', folder: 'vistadoc/planos' },
+          (error: UploadApiErrorResponse, result: UploadApiResponse) => {
+            if (error) return reject(error);
+            resolve(result);
+          },
+        )
+        .end(file.buffer);
+    });
+  }
+
+  // Imagen de proyecto (image)
+  async uploadProjectImage(file: Express.Multer.File): Promise<UploadApiResponse> {
+    return new Promise((resolve, reject) => {
+      cloudinary.uploader
+        .upload_stream(
+          { resource_type: 'image', folder: 'vistadoc/projects' },
+          (error: UploadApiErrorResponse, result: UploadApiResponse) => {
+            if (error) return reject(error);
+            resolve(result);
+          },
+        )
+        .end(file.buffer);
     });
   }
 }

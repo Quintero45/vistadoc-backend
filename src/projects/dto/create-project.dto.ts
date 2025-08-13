@@ -1,5 +1,5 @@
 // src/projects/dto/create-project.dto.ts
-import { IsNotEmpty, IsString, IsOptional, IsUrl } from 'class-validator';
+import { IsNotEmpty, IsString, IsOptional } from 'class-validator';
 import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
 
 export class CreateProjectDto {
@@ -28,10 +28,10 @@ export class CreateProjectDto {
   description?: string;
 
   @ApiPropertyOptional({
-    example: 'https://res.cloudinary.com/demo/image/upload/proyecto.jpg',
-    description: 'URL de la imagen representativa del proyecto',
+    type: 'string',
+    format: 'binary',
+    description: 'Archivo de imagen para el proyecto',
   })
-  @IsUrl()
   @IsOptional()
-  imageUrl?: string;
+  imageUrl?: any; // archivo recibido por multipart/form-data
 }
