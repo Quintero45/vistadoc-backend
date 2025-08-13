@@ -49,14 +49,14 @@ const isProd = process.env.NODE_ENV === 'production';
 
     // HTTP para el microservicio de detección (baseURL por env)
     HttpModule.registerAsync({
-      inject: [ConfigService],
-      useFactory: (cfg: ConfigService) => ({
-        baseURL: cfg.get<string>('DETECTOR_BASE_URL'),
-        timeout: 20000,
-        maxContentLength: Infinity,
-        maxBodyLength: Infinity,
-      }),
-    }),
+  inject: [ConfigService],
+  useFactory: (cfg: ConfigService) => ({
+    baseURL: cfg.get<string>('DETECTOR_BASE_URL'), // p.ej. https://unit-detector-vistadoc.onrender.com
+    timeout: 20000,
+    maxContentLength: Infinity,
+    maxBodyLength: Infinity,
+  }),
+}),
 
     UsersModule,
     AuthModule,
