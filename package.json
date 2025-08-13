@@ -30,6 +30,7 @@
     "@nestjs/jwt": "^11.0.0",
     "@nestjs/passport": "^11.0.5",
     "@nestjs/platform-express": "^11.0.1",
+    "@nestjs/swagger": "^11.2.0",
     "@nestjs/typeorm": "^11.0.0",
     "axios": "^1.11.0",
     "bcrypt": "^6.0.0",
@@ -38,6 +39,7 @@
     "cloudinary": "^1.41.3",
     "dotenv": "^17.2.0",
     "form-data": "^4.0.4",
+    "module-alias": "^2.2.3",
     "multer": "^2.0.2",
     "multer-storage-cloudinary": "^4.0.0",
     "passport": "^0.7.0",
@@ -45,8 +47,8 @@
     "pg": "^8.16.3",
     "reflect-metadata": "^0.2.2",
     "rxjs": "^7.8.1",
-    "typeorm": "^0.3.25",
-    "module-alias": "^2.2.3"
+    "swagger-ui-express": "^5.0.1",
+    "typeorm": "^0.3.25"
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3.2.0",
@@ -83,13 +85,19 @@
     "src": "dist"
   },
   "jest": {
-    "moduleFileExtensions": ["js", "json", "ts"],
+    "moduleFileExtensions": [
+      "js",
+      "json",
+      "ts"
+    ],
     "rootDir": "src",
     "testRegex": ".*\\.spec\\.ts$",
     "transform": {
       "^.+\\.(t|j)s$": "ts-jest"
     },
-    "collectCoverageFrom": ["**/*.(t|j)s"],
+    "collectCoverageFrom": [
+      "**/*.(t|j)s"
+    ],
     "coverageDirectory": "../coverage",
     "testEnvironment": "node"
   }
