@@ -30,7 +30,9 @@ const isProd = process.env.NODE_ENV === 'production';
               autoLoadEntities: true,
               synchronize: true, // prod: migraciones, no sync
               ssl: isProd,
-              extra: isProd ? { ssl: { rejectUnauthorized: false } } : undefined,
+              extra: isProd
+                ? { ssl: { rejectUnauthorized: false } }
+                : undefined,
             }
           : {
               type: 'postgres',
@@ -49,8 +51,10 @@ const isProd = process.env.NODE_ENV === 'production';
     HttpModule.registerAsync({
       inject: [ConfigService],
       useFactory: (cfg: ConfigService) => ({
-        baseURL: cfg.get<string>('https://unit-detector-vistadoc.onrender.com'), // ej: https://unit-detector.onrender.com
+        baseURL: cfg.get<string>('DETECTOR_BASE_URL'),
         timeout: 20000,
+        maxContentLength: Infinity,
+        maxBodyLength: Infinity,
       }),
     }),
 
