@@ -28,7 +28,7 @@ const isProd = process.env.NODE_ENV === 'production';
               type: 'postgres',
               url: cfg.get<string>('DATABASE_URL'),
               autoLoadEntities: true,
-              synchronize: false, // prod: migraciones, no sync
+              synchronize: true, // prod: migraciones, no sync
               ssl: isProd,
               extra: isProd ? { ssl: { rejectUnauthorized: false } } : undefined,
             }
