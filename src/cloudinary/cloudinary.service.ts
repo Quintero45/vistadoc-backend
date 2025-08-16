@@ -6,6 +6,22 @@ import { UploadApiResponse, UploadApiErrorResponse } from 'cloudinary';
 
 @Injectable()
 export class CloudinaryService {
+
+  // PDF/Documentos (raw)
+  async uploadDocuments(file: Express.Multer.File): Promise<UploadApiResponse> {
+    return new Promise((resolve, reject) => {
+      cloudinary.uploader
+        .upload_stream(
+          { resource_type: 'raw', folder: 'vistadoc/documents' },
+          (error: UploadApiErrorResponse, result: UploadApiResponse) => {
+            if (error) return reject(error);
+            resolve(result);
+          },
+        )
+        .end(file.buffer);
+    });
+  }
+
   // PDF/plano (raw)
   async uploadPdf(file: Express.Multer.File): Promise<UploadApiResponse> {
     return new Promise((resolve, reject) => {
