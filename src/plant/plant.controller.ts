@@ -29,14 +29,14 @@ import {
   ApiParam,
 } from '@nestjs/swagger';
 
+//@ApiBearerAuth()
 @ApiTags('plants')
-@ApiBearerAuth()
 @Controller('plants')
 export class PlantController {
   constructor(private readonly plantService: PlantService) {}
 
-  @UseGuards(AuthGuard('jwt'), RolesGuard)
-  @Roles(UserRole.ADMIN, UserRole.SUPERVISOR)
+  //@UseGuards(AuthGuard('jwt'), RolesGuard)
+  //@Roles(UserRole.ADMIN, UserRole.SUPERVISOR)
   @Post('create')
   @UseInterceptors(FileInterceptor('floorPlan'))
   @ApiOperation({ summary: 'Crear una planta (opcionalmente subiendo plano)' })
@@ -99,8 +99,8 @@ export class PlantController {
   }
 
   // -------- trigger para detector --------
-  @UseGuards(AuthGuard('jwt'), RolesGuard)
-  @Roles(UserRole.ADMIN, UserRole.SUPERVISOR)
+  //@UseGuards(AuthGuard('jwt'), RolesGuard)
+  //@Roles(UserRole.ADMIN, UserRole.SUPERVISOR)
   @Post(':id/detect-units')
   @ApiOperation({ summary: 'Detectar unidades en el plano de la planta' })
   @ApiParam({ name: 'id', example: 1, description: 'ID de la planta' })

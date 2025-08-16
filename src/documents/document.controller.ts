@@ -12,7 +12,6 @@ import {
 } from '@nestjs/swagger';
 
 @ApiTags('documents')
-@ApiBearerAuth()
 @Controller('documents')
 export class DocumentController {
   constructor(private readonly documentService: DocumentService) {}

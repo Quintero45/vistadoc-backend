@@ -11,7 +11,6 @@ import {
 } from '@nestjs/swagger';
 
 @ApiTags('companies')
-@ApiBearerAuth() // quítalo si este recurso es público
 @Controller('companies')
 export class CompaniesController {
   constructor(private readonly companiesService: CompaniesService) {}

@@ -16,14 +16,16 @@ import {
   ApiParam, ApiForbiddenResponse, ApiUnauthorizedResponse, ApiConsumes, ApiBody
 } from '@nestjs/swagger';
 
+//@ApiBearerAuth()
 @ApiTags('projects')
-@ApiBearerAuth()
 @Controller('projects')
 export class ProjectsController {
   constructor(private readonly projectsService: ProjectsService) {}
 
-  @UseGuards(AuthGuard('jwt'), RolesGuard)
-  @Roles(UserRole.ADMIN, UserRole.SUPERVISOR)
+  //@ApiUnauthorizedResponse({ description: 'No autenticado' })
+  //@ApiForbiddenResponse({ description: 'Sin permisos' })
+  //@UseGuards(AuthGuard('jwt'), RolesGuard)
+  //@Roles(UserRole.ADMIN, UserRole.SUPERVISOR)
   @Post('create')
   @UseInterceptors(FileInterceptor('image'))
   @ApiOperation({ summary: 'Crear proyecto (opcionalmente subiendo imagen)' })
@@ -60,8 +62,6 @@ export class ProjectsController {
       },
     },
   })
-  @ApiUnauthorizedResponse({ description: 'No autenticado' })
-  @ApiForbiddenResponse({ description: 'Sin permisos' })
   async createProject(
     @UploadedFile() file: Express.Multer.File,
     @Body() dto: CreateProjectDto,
@@ -71,7 +71,7 @@ export class ProjectsController {
     return this.projectsService.create(dto, companyId, file);
   }
 
-  @UseGuards(AuthGuard('jwt'))
+  //@UseGuards(AuthGuard('jwt'))
   @Get('my-projects')
   @ApiOperation({ summary: 'Listar proyectos de mi compañía' })
   @ApiOkResponse({
@@ -84,8 +84,8 @@ export class ProjectsController {
     return this.projectsService.findAllByCompany(companyId);
   }
 
-  @UseGuards(AuthGuard('jwt'), RolesGuard)
-  @Roles(UserRole.ADMIN, UserRole.SUPERVISOR)
+  //@UseGuards(AuthGuard('jwt'), RolesGuard)
+  //@Roles(UserRole.ADMIN, UserRole.SUPERVISOR)
   @Put(':id')
   @ApiOperation({ summary: 'Actualizar un proyecto propio' })
   @ApiParam({ name: 'id', example: 7 })
@@ -101,8 +101,8 @@ export class ProjectsController {
     return this.projectsService.update(id, dto, companyId);
   }
 
-  @UseGuards(AuthGuard('jwt'), RolesGuard)
-  @Roles(UserRole.ADMIN, UserRole.SUPERVISOR)
+  //@UseGuards(AuthGuard('jwt'), RolesGuard)
+  //@Roles(UserRole.ADMIN, UserRole.SUPERVISOR)
   @Delete(':id')
   @ApiOperation({ summary: 'Eliminar un proyecto propio' })
   @ApiParam({ name: 'id', example: 7 })

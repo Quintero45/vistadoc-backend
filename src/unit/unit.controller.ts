@@ -11,8 +11,7 @@ import {
   ApiNoContentResponse,
 } from '@nestjs/swagger';
 
-@ApiTags('units')
-@ApiBearerAuth() // quítalo si estas rutas son públicas
+@ApiTags('units') // quítalo si estas rutas son públicas
 @Controller('units')
 export class UnitController {
   constructor(private readonly unitService: UnitService) {}
