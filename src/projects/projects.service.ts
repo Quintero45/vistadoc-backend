@@ -43,11 +43,11 @@ export class ProjectsService {
   }
 
   async findAllByCompany(companyId: number) {
-    return this.projectRepo.find({
-      where: { company: { id: companyId } },
-      relations: ['company'],
-    });
-  }
+  return this.projectRepo.find({
+    where: { company: { id: companyId } },
+    relations: ['company'],
+  });
+}
 
   async update(projectId: number, dto: UpdateProjectDto, companyId: number) {
     const project = await this.projectRepo.findOne({

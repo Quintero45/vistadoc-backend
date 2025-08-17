@@ -71,18 +71,14 @@ export class ProjectsController {
     return this.projectsService.create(dto, companyId, file);
   }
 
-  //@UseGuards(AuthGuard('jwt'))
-  @Get('my-projects')
-  @ApiOperation({ summary: 'Listar proyectos de mi compañía' })
-  @ApiOkResponse({
-    description: 'Listado de proyectos',
-    schema: { example: [{ id: 1, name: 'Torre Norte', company: { id: 1 } }] },
-  })
-  @ApiUnauthorizedResponse({ description: 'No autenticado' })
-  async getProjects(@Req() req: any) {
-    const companyId = req.user.company.id;
+  // NUEVO: sin AuthGuard, recibe companyId por ruta
+  @Get('by-company/:companyId')
+  @ApiOperation({ summary: 'Listar proyectos por companyId (sin token)' })
+  @ApiParam({ name: 'companyId', example: 1 })
+  getByCompany(@Param('companyId', ParseIntPipe) companyId: number) {
     return this.projectsService.findAllByCompany(companyId);
   }
+
 
   //@UseGuards(AuthGuard('jwt'), RolesGuard)
   //@Roles(UserRole.ADMIN, UserRole.SUPERVISOR)
