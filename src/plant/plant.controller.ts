@@ -110,17 +110,18 @@ export class PlantController {
       example: {
         plantId: 1,
         count: 30,
-        image_with_boxes: '/download/boxed_abc.png',
+        floorPlanUrl: 'https://res.cloudinary.com/.../plano_analizado.png', // Ahora se devuelve la URL del plano original
         units: [
           {
             id: 10,
+            number: "101", // Example: "101" as per Unit entity's string type
             polygon: [
               [403, 248],
               [447, 248],
               [447, 271],
               [403, 271],
             ],
-            angle: 90,
+            angle: 0, // Actualizado a 0
             width: 23,
             height: 44,
             centerX: 425,
@@ -131,7 +132,7 @@ export class PlantController {
       },
     },
   })
-  detectUnits(@Param('id', ParseIntPipe) id: number) {
+  async detectUnits(@Param('id', ParseIntPipe) id: number) {
     return this.plantService.detectUnits(id);
   }
 }
