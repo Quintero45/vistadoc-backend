@@ -35,7 +35,7 @@ export class PlantService {
 
     let uploadedUrl: string | undefined;
     if (file) {
-      const result = await this.cloudinaryService.uploadPdf(file);
+      const result = await this.cloudinaryService.uploadPlantImage(file);
       uploadedUrl = result.secure_url;
     }
 

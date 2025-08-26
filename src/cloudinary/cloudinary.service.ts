@@ -22,12 +22,12 @@ export class CloudinaryService {
     });
   }
 
-  // PDF/plano (raw)
-  async uploadPdf(file: Express.Multer.File): Promise<UploadApiResponse> {
+  // imagen/plano (PNF/JPG) (image)
+  async uploadPlantImage(file: Express.Multer.File): Promise<UploadApiResponse> {
     return new Promise((resolve, reject) => {
       cloudinary.uploader
         .upload_stream(
-          { resource_type: 'raw', folder: 'vistadoc/planos' },
+          { resource_type: 'image', folder: 'vistadoc/plant' },
           (error: UploadApiErrorResponse, result: UploadApiResponse) => {
             if (error) return reject(error);
             resolve(result);
